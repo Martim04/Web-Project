@@ -13,7 +13,7 @@ String senha = request.getParameter("senha");
 
 try {
     Class.forName("com.mysql.cj.jdbc.Driver");
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Agencia_viagens", "root", "martimlra");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Agencia_viagens", "root", "");
     String query = "SELECT * FROM clientes WHERE nome=? AND senha=?";
     PreparedStatement ps = conn.prepareStatement(query);
     ps.setString(1, nome);
