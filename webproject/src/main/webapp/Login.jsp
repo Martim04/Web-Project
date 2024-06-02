@@ -8,26 +8,29 @@
 </head>
 <body>
 <%
-String nome = request.getParameter("nome");
+String email = request.getParameter("email");
 String senha = request.getParameter("senha");
 
 try {
     Class.forName("com.mysql.cj.jdbc.Driver");
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Agencia_viagens", "root", "");
-    String query = "SELECT * FROM clientes WHERE nome=? AND senha=?";
+    String query = "SELECT * FROM clientes WHERE email=? AND senha=?";
     PreparedStatement ps = conn.prepareStatement(query);
-    ps.setString(1, nome);
+    ps.setString(1, email);
     ps.setString(2, senha);
     ResultSet rs = ps.executeQuery();
 
     if (rs.next()) {
         // Login successful
-        session.setAttribute("nome", nome);
+        String nome = rs.getString("nome"); // Obtenha o nome do resultado do conjunto
+        session.setAttribute("nome", nome); // Armazene o nome na sessão
+        String emailshow = rs.getString("email"); // Obtenha o nome do resultado do conjunto
+        session.setAttribute("email", emailshow); // Armazene o nome na sessão
         rs.close();
         ps.close();
         conn.close();
         response.sendRedirect("index.jsp"); // Redireciona para a página de boas-vindas
-    } else {
+    }else {
         // Login failed due to invalid credentials
         rs.close();
         ps.close();

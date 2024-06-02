@@ -63,7 +63,7 @@
     }
     .registerbox {
         width: 320px;
-        height: 600px;
+        height: 780px;
         background: #333333;
         color: white;
         top: 50%;

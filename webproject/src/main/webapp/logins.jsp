@@ -115,11 +115,11 @@
             <br>
             <form action="Login.jsp" method="post" name="Login" id="Login">
             <p>Nome</p>
-            <input type="text" name="nome"  placeholder="Nome de Utilizador">
+            <input type="text" name="email"  placeholder="Nome de Utilizador">
             <p>Palavra-passe</p>
             <input type="password" name="senha"  placeholder="Palavra-passe">
-            <input type="submit" name="login" value="Login"">
-            <a href="perderpass.html">Perdes-te a password?</a>
+            <input type="submit" name="login" value="Login">
+            <a href="registo_form.jsp">Registar</a>
             </form>
         </div>
 

@@ -17,6 +17,10 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        		<!-- JS do Bootstrap (dependências) -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -29,15 +33,84 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Packs</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#voo">Voos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#hotel">Hoteis</a></li>
+                        <li class="nav-item"><a class="nav-link" href="shop_pack.jsp">Packs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="shop_voos.jsp">Voos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="shop_hotel.jsp">Hoteis</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%
+        if (session != null) {
+            String nomeUsuario = (String) session.getAttribute("nome");
+            String nomeEmail = (String) session.getAttribute("email");
+            if (nomeUsuario != null) {
+                out.print("| " + nomeUsuario);
+            } else {
+                out.print("Login");
+            }
+        } else {
+            out.print("Login");
+        }
+        %>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <%
+        if (session != null) {
+            String nomeUsuario = (String) session.getAttribute("nome");
+            if (nomeUsuario != null) {
+        %>
+                <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#resetPasswordModal">Redefinir Senha</a></li>
+        <%
+            } else {
+        %>
+                <li><a class="dropdown-item" href="login.jsp">Login</a></li>
+        <%
+            }
+        } else {
+        %>
+            <li><a class="dropdown-item" href="login.jsp">Login</a></li>
+        <%
+        }
+        %>
+    </ul>
+</li>
+
                     </ul>
                 </div>
             </div>
         </nav>
+        
+        <!-- Modal -->
+<div class="modal fade" id="resetPasswordModal" tabindex="-1" role="dialog" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resetPasswordModalLabel">Redefinir Senha</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="resetPasswordForm" method="post" action="reset_password.jsp">
+                    <div class="form-group">
+                        <label for="newPassword">Nova Senha</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Nova Senha</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Redefinir Senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        
         <!-- Masthead-->
         <header class="masthead">
             <div class="container">
@@ -787,6 +860,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        
        
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
